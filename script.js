@@ -6,8 +6,8 @@ let colors = document.querySelectorAll('.color-change');
 let color = 'blue';
 let border = document.querySelector('.drawing-area');
 
-x.addEventListener('change', changeX);
-y.addEventListener('change', changeY);
+x.addEventListener('change', changeDim);
+y.addEventListener('change', changeDim);
 reset.addEventListener('click', clear);
 colors.forEach(function(btn) {
   btn.addEventListener('click', colorChange);
@@ -49,27 +49,23 @@ function darken(event) {
   event.target.style.opacity = 1;
 }
 
-function changeX(event) {
-  xDim = event.target.value;
-  if (isNaN(xDim) || xDim > 100) {
-    xDim = 12;
-    event.target.value = 12;
+function changeDim(event) {
+  if (event.target.id = 'x-dimension') {
+    xDim = event.target.value;
+    if (isNaN(xDim) || xDim > 100) {
+      xDim = 12;
+      event.target.value = 12;
+    };
+  } else {
+    yDim = event.target.value
+    if (isNaN(yDim) || yDim > 100) {
+      yDim = 12;
+      event.target.value = 12;
+    };
   };
   clear();
-};
-
-function changeY(event) {
-  yDim = event.target.value;
-  if (isNaN(yDim) || yDim > 100) {
-    yDim = 12;
-    event.target.value = 12;
-  };
-  clear();
-};
-
+}
 
 let xDim = document.getElementById('x-dimension').value;
 let yDim = document.getElementById('y-dimension').value;
-console.log(xDim);
-console.log(yDim);
 draw(xDim, yDim);
