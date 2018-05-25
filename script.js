@@ -1,23 +1,38 @@
-let reset = document.getElementById('reset');
+const reset = document.getElementById('reset');
 let x = document.getElementById('x-dimension');
 let y = document.getElementById('y-dimension');
 
+let colors = document.querySelectorAll('.color-change');
+let color = 'blue';
+let border = document.querySelector('.drawing-area');
+
 x.addEventListener('change', changeX);
 y.addEventListener('change', changeY);
+reset.addEventListener('click', clear);
+colors.forEach(function(btn) {
+  btn.addEventListener('click', colorChange);
+});
 
 function clear() {
   let cells = document.querySelectorAll('.cell');
   let area = document.querySelector('.drawing-area');
   cells.forEach(function(cell) {
     area.removeChild(cell);
-  })
+  });
+  draw(xDim, yDim);
 }
 
-function draw(grid) {
+function colorChange(event) {
+  color = event.target.innerText.toLowerCase();
+  console.log(color);
+  clear();
+}
+
+function draw() {
   for (x = 0; x < xDim; x++) {
     for (y = 0; y < yDim; y++) {
       let cell = document.createElement('div');
-      cell.className = 'cell';
+      cell.className = 'cell ' + color;
       let width = (512 / xDim);
       let height = (512 / yDim);
 
@@ -41,7 +56,6 @@ function changeX(event) {
     event.target.value = 12;
   };
   clear();
-  draw(xDim, yDim);
 };
 
 function changeY(event) {
@@ -51,7 +65,6 @@ function changeY(event) {
     event.target.value = 12;
   };
   clear();
-  draw(xDim, yDim);
 };
 
 
